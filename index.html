@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TomFinder - Assistente musical inteligente para descobrir o tom de músicas e praticar vocais">
+    <title>TomFinder - Assistente Musical Inteligente</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'music': {
+                            'dark': '#0f172a',
+                            'primary': '#22d3ee',
+                            'secondary': '#a78bfa',
+                            'accent': '#fb923c',
+                            'surface': '#1e293b'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body class="bg-music-dark text-white font-sans">
+    <!-- Language Selector -->
+    <div class="fixed top-4 right-4 z-50">
+        <div class="relative">
+            <button id="langBtn" class="flex items-center gap-2 px-4 py-2 bg-music-surface/80 backdrop-blur-sm border border-gray-700 rounded-lg hover:border-music-primary transition-all">
+                <span id="langFlag">🇧🇷</span>
+                <span id="langText" class="font-medium">PT</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </button>
+            <div id="langDropdown" class="hidden absolute right-0 mt-2 w-48 bg-music-surface border border-gray-700 rounded-lg shadow-xl overflow-hidden">
+                <button data-lang="pt-BR" class="lang-option w-full flex items-center gap-3 px-4 py-3 hover:bg-music-primary/10 transition-colors text-left">
+                    <span>🇧🇷</span>
+                    <span>Português (BR)</span>
+                </button>
+                <button data-lang="en" class="lang-option w-full flex items-center gap-3 px-4 py-3 hover:bg-music-primary/10 transition-colors text-left">
+                    <span>🇨🇦</span>
+                    <span>English</span>
+                </button>
+                <button data-lang="es" class="lang-option w-full flex items-center gap-3 px-4 py-3 hover:bg-music-primary/10 transition-colors text-left">
+                    <span>🇪🇸</span>
+                    <span>Español</span>
+                </button>
+                <button data-lang="fr" class="lang-option w-full flex items-center gap-3 px-4 py-3 hover:bg-music-primary/10 transition-colors text-left">
+                    <span>🇫🇷</span>
+                    <span>Français</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen flex flex-col items-center justify-center px-4 py-20 relative overflow-hidden">
+        <!-- Animated Background -->
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-music-primary/10 rounded-full blur-3xl animate-pulse-slow"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-music-secondary/10 rounded-full blur-3xl animate-pulse-slow" style="animation-delay: 1s;"></div>
+        </div>
+
+        <div class="relative z-10 max-w-4xl mx-auto text-center">
+            <!-- Logo -->
+            <div class="mb-8 animate-fade-in-down">
+                <img 
+                    src="https://i.ibb.co/kCmyQk7/Minimalist-Tom-Finder-App-Logo.png" 
+                    alt="TomFinder Logo" 
+                    class="w-48 mx-auto rounded-2xl shadow-xl shadow-music-primary/20 border border-white/5"
+                />
+            </div>
+
+            <!-- Title -->
+            <h1 class="text-5xl md:text-7xl font-black mb-6 animate-fade-in-up" data-i18n="hero.title">
+                TomFinder
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-300 mb-4 animate-fade-in-up" style="animation-delay: 0.1s;" data-i18n="hero.subtitle">
+                Assistente musical inteligente para músicos e cantores
+            </p>
+            <p class="text-lg text-gray-400 mb-12 animate-fade-in-up" style="animation-delay: 0.2s;" data-i18n="hero.description">
+                Descubra o tom, BPM e acordes de músicas automaticamente. Pratique vocais com teclado de piano interativo.
+            </p>
+
+            <!-- CTA Buttons -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in-up" style="animation-delay: 0.3s;">
+                <a href="https://play.google.com/store/apps/details?id=com.tomfinder.app" 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   class="px-8 py-4 bg-gradient-to-r from-music-primary to-music-secondary text-white font-bold text-lg rounded-2xl shadow-xl hover:brightness-110 active:scale-95 transition-all">
+                    <span data-i18n="hero.download">Baixar no Google Play</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-20 px-4 bg-music-surface/30">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl md:text-5xl font-black text-center mb-16" data-i18n="features.title">
+                Funcionalidades
+            </h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-music-surface/50 p-8 rounded-2xl border border-gray-800 hover:border-music-primary/50 transition-all hover:shadow-xl hover:shadow-music-primary/10">
+                    <div class="text-5xl mb-4">🔍</div>
+                    <h3 class="text-2xl font-bold mb-3 text-music-primary" data-i18n="features.keyFinder.title">
+                        Descobrir Tom
+                    </h3>
+                    <p class="text-gray-300" data-i18n="features.keyFinder.description">
+                        Descubra automaticamente o tom, BPM e sequência de acordes de qualquer música do YouTube, Spotify ou SoundCloud.
+                    </p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="bg-music-surface/50 p-8 rounded-2xl border border-gray-800 hover:border-music-primary/50 transition-all hover:shadow-xl hover:shadow-music-primary/10">
+                    <div class="text-5xl mb-4">🎹</div>
+                    <h3 class="text-2xl font-bold mb-3 text-music-primary" data-i18n="features.vocalPractice.title">
+                        Prática Vocal
+                    </h3>
+                    <p class="text-gray-300" data-i18n="features.vocalPractice.description">
+                        Teclado de piano interativo com pads musicais para aquecimento vocal, oração e prática musical.
+                    </p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="bg-music-surface/50 p-8 rounded-2xl border border-gray-800 hover:border-music-primary/50 transition-all hover:shadow-xl hover:shadow-music-primary/10">
+                    <div class="text-5xl mb-4">🌍</div>
+                    <h3 class="text-2xl font-bold mb-3 text-music-primary" data-i18n="features.multilang.title">
+                        Multi-idioma
+                    </h3>
+                    <p class="text-gray-300" data-i18n="features.multilang.description">
+                        Disponível em Português, Inglês, Espanhol e Francês para músicos ao redor do mundo.
+                    </p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="bg-music-surface/50 p-8 rounded-2xl border border-gray-800 hover:border-music-primary/50 transition-all hover:shadow-xl hover:shadow-music-primary/10">
+                    <div class="text-5xl mb-4">🎵</div>
+                    <h3 class="text-2xl font-bold mb-3 text-music-primary" data-i18n="features.worship.title">
+                        Para Equipes de Louvor
+                    </h3>
+                    <p class="text-gray-300" data-i18n="features.worship.description">
+                        Desenvolvido especialmente para ajudar equipes de louvor e músicos a encontrar a tonalidade perfeita.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="py-20 px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-4xl md:text-5xl font-black mb-8" data-i18n="about.title">
+                Sobre o App
+            </h2>
+            <p class="text-xl text-gray-300 leading-relaxed mb-8" data-i18n="about.text">
+                Este app foi desenvolvido com muito carinho para ajudar o grupo de louvor da minha igreja. Como músicos, sabemos como é desafiador descobrir o tom exato de uma música ou encontrar a tonalidade perfeita para nossa voz. Espero que esta ferramenta seja uma bênção na sua caminhada musical!
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="https://play.google.com/store/apps/details?id=com.tomfinder.app" 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   class="px-8 py-4 bg-gradient-to-r from-music-primary to-music-secondary text-white font-bold text-lg rounded-2xl shadow-xl hover:brightness-110 active:scale-95 transition-all">
+                    <span data-i18n="about.download">Baixar Agora</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-4 bg-music-surface/50 border-t border-gray-800">
+        <div class="max-w-6xl mx-auto text-center">
+            <p class="text-gray-400 mb-4" data-i18n="footer.copyright">
+                © 2024 TomFinder. Desenvolvido com ❤️ para músicos.
+            </p>
+            <p class="text-sm text-gray-500" data-i18n="footer.version">
+                Versão 1.0.0
+            </p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+

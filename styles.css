@@ -1,0 +1,112 @@
+/* Custom Colors */
+:root {
+    --music-dark: #0f172a;
+    --music-primary: #22d3ee;
+    --music-secondary: #a78bfa;
+    --music-accent: #fb923c;
+    --music-surface: #1e293b;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--music-dark);
+    color: white;
+}
+
+/* Custom Tailwind Colors */
+.bg-music-dark {
+    background-color: var(--music-dark);
+}
+
+.bg-music-primary {
+    background-color: var(--music-primary);
+}
+
+.bg-music-secondary {
+    background-color: var(--music-secondary);
+}
+
+.bg-music-accent {
+    background-color: var(--music-accent);
+}
+
+.bg-music-surface {
+    background-color: var(--music-surface);
+}
+
+.text-music-primary {
+    color: var(--music-primary);
+}
+
+.text-music-secondary {
+    color: var(--music-secondary);
+}
+
+.border-music-primary {
+    border-color: var(--music-primary);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.6s ease-out;
+}
+
+.animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.animate-fade-in-down {
+    animation: fadeInDown 0.6s ease-out;
+}
+
+.animate-pulse-slow {
+    animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Selection color */
+::selection {
+    background-color: var(--music-primary);
+    color: white;
+}
+
+::-moz-selection {
+    background-color: var(--music-primary);
+    color: white;
+}
+
